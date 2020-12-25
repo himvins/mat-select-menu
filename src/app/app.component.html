@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi level dropdown</title>
+</head>
+<body class="container">
+  <mat-form-field class="dropdown">
+    <mat-select #mySelect [(ngModel)]="selectedClassification" [disabled]="true"                            
+                            [matMenuTriggerFor]="levelOne" #levelOneTrigger="matMenuTrigger" (click)="levelOneTrigger.openMenu()">
+      <mat-option *ngFor="let category of selectionList" [value]="category">{{category}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
+    <ng-container *ngFor="let menuItem of modulesList">   
+    <span (mouseleave)="levelOneTrigger.closeMenu()"></span>
+    <ng-container>
+        <li mat-menu-item [matMenuTriggerFor]="levelTwo">
+          <span>{{menuItem.label}}</span>
+          </li>
+          <mat-menu #levelTwo="matMenu">
+              <ng-container *ngFor="let child2 of menuItem.children">
+                <button mat-menu-item [matMenuTriggerFor]="levelThree">
+                {{child2.label}}
+                </button>
+                <mat-menu #levelThree="matMenu">
+              <ng-container *ngFor="let child3 of child2.children">
+                <button mat-menu-item [value]="child3.label" (click)="onDropdownItemSelected($event)" [ngClass]="{'selectedMenu': child3.label === selectedClassification}">
+                {{child3.label}}
+                </button>
+              </ng-container>
+          </mat-menu>
+              </ng-container>
+          </mat-menu>
+  </ng-container>
+</ng-container>
+</mat-menu>
+<div class="modelValue">Selected value: {{selectedClassification}}</div>
+</body>
+</html>

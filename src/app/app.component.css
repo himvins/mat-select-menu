@@ -1,0 +1,34 @@
+::ng-deep .mat-select-value-text {
+    color: black;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+
+::ng-deep .mat-select-trigger {
+    border: 1px solid black;
+}
+
+.dropdown {
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.classification {
+    color: black;
+}
+
+.modelValue {
+    margin-left: 100px;
+}
+
+.selectedMenu {
+    color: black;
+    background-color: lightgray;
+
+}
+
+selectedMenu::after {
+    content: " (" attr(href) ")";
+  }
